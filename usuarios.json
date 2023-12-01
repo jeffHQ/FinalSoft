@@ -1,0 +1,23 @@
+{
+    "usuarios": [
+      {
+        "numero": "1",
+        "nombre": "Jeff",
+        "saldo": 200,
+        "contactos": ["936732366", "941627455"]
+      },
+      {
+        "numero": "936732366",
+        "nombre": "Ronaldo",
+        "saldo": 200,
+        "contactos": ["333333333", "444444444"]
+      },
+      {
+        "numero": "941627455",
+        "nombre": "Andrea",
+        "saldo": 200,
+        "contactos": ["555555555", "666666666"]
+      }
+    ]
+  }
+  

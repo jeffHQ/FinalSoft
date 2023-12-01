@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Consulta de Contactos</title>
+</head>
+<body>
+  <h1>Consulta de Contactos</h1>
+
+  <label for="numeroCuenta">Ingresa tu número de cuenta:</label>
+  <input type="text" id="numeroCuenta" name="numeroCuenta">
+  <button onclick="obtenerContactos()">Consultar</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function obtenerContactos() {
+      const numeroCuenta = document.getElementById('numeroCuenta').value;
+
+      fetch(`/billetera/contactos?minumero=${numeroCuenta}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Número de cuenta no encontrado');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const resultadoDiv = document.getElementById('resultado');
+          resultadoDiv.innerHTML = '<h2>Contactos:</h2>';
+          if (data.contactos && data.contactos.length > 0) {
+            const listaContactos = document.createElement('ul');
+            data.contactos.forEach(contacto => {
+              const listItem = document.createElement('li');
+              listItem.textContent = contacto;
+              listaContactos.appendChild(listItem);
+            });
+            resultadoDiv.appendChild(listaContactos);
+          } else {
+            resultadoDiv.textContent = 'No se encontraron contactos para este número de cuenta.';
+          }
+        })
+        .catch(error => {
+          const resultadoDiv = document.getElementById('resultado');
+          resultadoDiv.textContent = error.message;
+        });
+    }
+  </script>
+</body>
+</html>
